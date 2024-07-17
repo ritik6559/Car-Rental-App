@@ -1,6 +1,8 @@
 import 'package:car_rental_app/data/models/car/car_model.dart';
+import 'package:car_rental_app/presentation/details/widgets/more_card.dart';
 import 'package:car_rental_app/presentation/home/widgets/car_card.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class CarDetailsScreen extends StatelessWidget {
   final Car car;
@@ -41,18 +43,20 @@ class CarDetailsScreen extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            spreadRadius: 5,
-                          )
-                        ]),
+                      color: const Color(0xffF3F3F3),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          spreadRadius: 5,
+                        )
+                      ],
+                    ),
                     child: const Column(
                       children: [
                         CircleAvatar(
-                          radius: 60,
+                          radius: 40,
                           backgroundImage: AssetImage(
                             'assets/user.png',
                           ),
@@ -74,26 +78,41 @@ class CarDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                const Gap(20),
                 Expanded(
                   child: Container(
                     height: 170,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            'assets/maps.png',
-                          ),
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            spreadRadius: 5,
-                          )
-                        ]),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          spreadRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        'assets/maps.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 )
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                MoreCard(car: car),
+                const SizedBox(height: 5),
+                MoreCard(car: car),
+                const SizedBox(height: 5),
+                MoreCard(car: car),
               ],
             ),
           )
