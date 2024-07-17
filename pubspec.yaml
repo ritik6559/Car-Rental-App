@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   firebase_core: ^3.2.0
   gap: ^3.0.1
+  latlong2: ^0.9.1
+  flutter_map: ^7.0.2
+  cloud_firestore: ^5.1.0
 
 dev_dependencies:
   flutter_test:
