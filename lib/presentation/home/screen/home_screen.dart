@@ -2,6 +2,7 @@ import 'package:car_rental_app/data/models/car/car_model.dart';
 import 'package:car_rental_app/presentation/home/widgets/car_card.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
