@@ -29,20 +29,22 @@ class MapDetailsScreen extends StatelessWidget {
               center: LatLng(51, -0.09),
               zoom: 13,
             ),
-            layers: [
-              TileLayerOptions(
-                  urlTemplate:
-                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  subdomains: ['a', 'b', 'c'])
+            children: [
+              TileLayer(
+                urlTemplate:
+                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                subdomains: const ['a', 'b', 'c'],
+              )
             ],
           ),
           Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: carDetailsCard(
-                car: car,
-              ))
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: carDetailsCard(
+              car: car,
+            ),
+          )
         ],
       ),
     );
@@ -58,15 +60,19 @@ Widget carDetailsCard({required Car car}) {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           width: double.infinity,
           decoration: const BoxDecoration(
-              color: Colors.black54,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black38, spreadRadius: 0, blurRadius: 10)
-              ]),
+            color: Colors.black54,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                spreadRadius: 0,
+                blurRadius: 10,
+              )
+            ],
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -140,12 +146,15 @@ Widget carDetailsCard({required Car car}) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Features",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 featureIcons(),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -153,17 +162,23 @@ Widget carDetailsCard({required Car car}) {
                   children: [
                     Text(
                       '\$${car.pricePerHour}/day',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black),
-                        child: Text(
-                          'Book Now',
-                          style: TextStyle(color: Colors.white),
-                        ))
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                      ),
+                      child: const Text(
+                        'Book Now',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
                   ],
                 )
               ],
@@ -171,7 +186,12 @@ Widget carDetailsCard({required Car car}) {
           ),
         ),
         Positioned(
-            top: 50, right: 20, child: Image.asset('assets/white_car.png'))
+          top: 50,
+          right: 20,
+          child: Image.asset(
+            car.image,
+          ),
+        )
       ],
     ),
   );
@@ -181,9 +201,21 @@ Widget featureIcons() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      featureIcon(Icons.local_gas_station, 'Diesel', 'Common Rail'),
-      featureIcon(Icons.speed, 'Acceleration', '0 - 100km/s'),
-      featureIcon(Icons.ac_unit, 'Cold', 'Temp Control'),
+      featureIcon(
+        Icons.local_gas_station,
+        'Diesel',
+        'Common Rail',
+      ),
+      featureIcon(
+        Icons.speed,
+        'Acceleration',
+        '0 - 100km/s',
+      ),
+      featureIcon(
+        Icons.ac_unit,
+        'Cold',
+        'Temp Control',
+      ),
     ],
   );
 }
@@ -205,7 +237,10 @@ Widget featureIcon(IconData icon, String title, String subtitle) {
         Text(title),
         Text(
           subtitle,
-          style: TextStyle(color: Colors.grey, fontSize: 10),
+          style: const TextStyle(
+            color: Colors.grey,
+            fontSize: 10,
+          ),
         )
       ],
     ),
