@@ -1,5 +1,6 @@
 import 'package:car_rental_app/presentation/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -50,10 +51,13 @@ class OnboardingScreen extends StatelessWidget {
                 width: 320,
                 height: 54,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    SharedPreferences ref =
+                        await SharedPreferences.getInstance();
+                    ref.setBool('isVisitedOnBoard', true);
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                          builder: (context) =>  HomeScreen(),
+                          builder: (context) => HomeScreen(),
                         ),
                         (route) => false);
                   },

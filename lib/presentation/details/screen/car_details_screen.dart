@@ -4,12 +4,43 @@ import 'package:car_rental_app/presentation/home/widgets/car_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class CarDetailsScreen extends StatelessWidget {
+class CarDetailsScreen extends StatefulWidget {
   final Car car;
   const CarDetailsScreen({
     super.key,
     required this.car,
   });
+
+  @override
+  State<CarDetailsScreen> createState() => _CarDetailsScreenState();
+}
+
+class _CarDetailsScreenState extends State<CarDetailsScreen>
+    with SingleTickerProviderStateMixin {
+  AnimationController? _controller;
+  Animation<double>? _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+
+    _animation = Tween<double>(begin: 1.0, end: 1.5).animate(_controller!)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    _controller!.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller!.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +63,7 @@ class CarDetailsScreen extends StatelessWidget {
       body: Column(
         children: [
           CarCard(
-            car: car,
+            car: widget.car,
           ),
           const SizedBox(height: 20),
           Padding(
@@ -94,9 +125,13 @@ class CarDetailsScreen extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'assets/maps.png',
-                        fit: BoxFit.cover,
+                      child: Transform.scale(
+                        scale: _animation!.value,
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          'assets/maps.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -108,11 +143,11 @@ class CarDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                MoreCard(car: car),
+                MoreCard(car: widget.car),
                 const SizedBox(height: 5),
-                MoreCard(car: car),
+                MoreCard(car: widget.car),
                 const SizedBox(height: 5),
-                MoreCard(car: car),
+                MoreCard(car: widget.car),
               ],
             ),
           )
